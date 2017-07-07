@@ -57,7 +57,7 @@ Page({
     var st = setTimeout(function(){
       that.canvasToTempImage();
       clearTimeout(st);
-    },200);
+    }, 800);
     
   },
   //获取临时缓存照片路径，存入data中
@@ -95,7 +95,7 @@ Page({
     wx.showToast({
       title: '生成中...',
       icon: 'loading',
-      duration:1000
+      duration:800
     });
     var st = setTimeout(function(){
       wx.hideToast()
@@ -106,7 +106,7 @@ Page({
         maskHidden:true
       });
       clearTimeout(st);
-    },1000)
+    }, 800)
     
     this.ononShareAppMessage(e);
   },

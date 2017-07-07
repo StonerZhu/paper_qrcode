@@ -7,7 +7,7 @@
     <form bindsubmit="formSubmit">
         <view class="input-row">
             <label>文字</label>
-            <input name='url' value='' type="text" maxlength="255" placeholder="{{placeholder}}"/>
+            <input name='url' value='' type="text" maxlength="255" placeholder="{{placeholder}}" />
         </view>
   
         <button formType="submit" class="mybtn" type="primary">生成二维码</button>
