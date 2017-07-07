@@ -118,7 +118,7 @@ Page({
     }
     return {
       title: '自定义转发标题',
-      path: '/page/user?id=123',
+      path: '/pages/main/index',
       success: function (res) {
         // 转发成功
       },
