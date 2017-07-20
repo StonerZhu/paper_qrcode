@@ -754,7 +754,7 @@ var QR = (function () {
         return out;
       },
 
-      draw: function (str, canvas, cavW, cavH, ecc) {
+      drawLine: function (str, canvas, cavW, cavH, ecc) {
 
         ecclevel = ecc || ecclevel;
         canvas = canvas || _canvas;
@@ -780,6 +780,51 @@ var QR = (function () {
               ctx.fillRect(px * (4 + i) + offset, px * (4 + j) + offset, px, px);
             }
           }
+        }
+        ctx.draw();
+      },
+       draw: function (str, canvas, cavW, cavH, ecc) {
+
+        ecclevel = ecc || ecclevel;
+        canvas = canvas || _canvas;
+        if (!canvas) {
+          console.warn('No canvas provided to draw QR code in!')
+          return;
+        }
+
+        var size = Math.min(cavW, cavH);
+        str = this.utf16to8(str);//增加中文显示
+        console.log(str)
+        var frame = this.getFrame(str),
+          ctx = wx.createCanvasContext(canvas),
+          px = Math.round(size / (width + 8));
+        var roundedSize = px * (width + 8),
+          offset = Math.floor((size - roundedSize) / 2);
+        size = roundedSize;
+        ctx.clearRect(0, 0, cavW, cavW);
+        
+        ctx.setStrokeStyle('#f7f7f7')
+        // ctx.setFillStyle('#ff0000');
+        for (var i = -2; i <= width+2; i++) {
+          for (var j = -2; j <= width+2; j++) {
+            ctx.moveTo(px * (4 + i) + offset, px * (2 ) + offset);
+            ctx.lineTo(px * (4 + i) + offset, px * (4 + width+2) + offset);
+
+            ctx.moveTo(px * (2) + offset,px*( 4 + i) + offset );
+            ctx.lineTo(px * (4+width+2) + offset, px * (4 + i) + offset);
+          }
+          
+        }
+        ctx.stroke();
+        ctx.save();
+        ctx.setFillStyle('#000000')
+        for (var i = 0; i < width; i++) {
+          for (var j = 0; j < width; j++) {
+            if (frame[j * width + i]) {
+              ctx.fillRect(px * (4 + i) + offset, px * (4 + j) + offset, px, px);
+            }
+          }
+
         }
         ctx.draw();
       }
