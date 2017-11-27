@@ -76,6 +76,24 @@ Page({
           console.log(res);
       }
     });
+    // wx.uploadFile({
+    //   url: 'https://upload.qiniup.com/imageView2/1/w/200/h/200/q/75|imageslim', //仅为示例，非真实的接口地址
+    //   filePath: this.data.imagePath,
+    //   name: 'file',
+    //   header: { "Content-Type": "application/octet-stream" },
+    //   formData: {
+    //     'user': 'test'
+    //   },
+    //   success: function (res) {
+    //     var data = res.data
+    //     console.log(data)
+    //     //do something
+    //   },
+    //   fail: function (res){
+    //     console.log(res.data)
+    //   }
+    // })
+
   },
   //点击图片进行预览，长按保存分享图片
   previewImg:function(e){
@@ -108,7 +126,7 @@ Page({
       clearTimeout(st);
     }, 800)
     
-    this.ononShareAppMessage(e);
+    this.onShareAppMessage(e);
   },
 
   onShareAppMessage: function (res) {
