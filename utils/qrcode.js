@@ -789,25 +789,47 @@ var QR = (function () {
       var frame = this.getFrame(str),
         ctx = wx.createCanvasContext(canvas),
         // px = Math.round(size / (width + 8));
-      px =  10;
+        px = 11;
       var roundedSize = px * (width + 8),
         offset = Math.floor((size - roundedSize) / 2);
       size = roundedSize;
       ctx.clearRect(0, 0, cavW, cavW);
-
-
+      console.log(width);
       ctx.setStrokeStyle('#f4f4f4')
-      // ctx.setFillStyle('#ff0000');
-      for (var i = -2; i <= width + 2; i++) {
-        for (var j = -2; j <= width + 2; j++) {
-          ctx.moveTo(px * (4 + i) + offset, px * (2) + offset);
-          ctx.lineTo(px * (4 + i) + offset, px * (4 + width + 2) + offset);
+      // 网格线
+      if (width == 21) {
+        for (var i = 0; i <= 29; i++) {
+          for (var j = 0; j <= 29; j++) {
+            ctx.moveTo(px * (i) + offset, px * (0) + offset);
+            ctx.lineTo(px * (i) + offset, px * (29) + offset);
 
-          ctx.moveTo(px * (2) + offset, px * (4 + i) + offset);
-          ctx.lineTo(px * (4 + width + 2) + offset, px * (4 + i) + offset);
+            ctx.moveTo(px * (0) + offset, px * (i) + offset);
+            ctx.lineTo(px * (29) + offset, px * (i) + offset);
+          }
 
         }
+      }
+      if (width == 25) {
+        for (var i = 2; i <= 31; i++) {
+          for (var j = 2; j <= 31; j++) {
+            ctx.moveTo(px * (i) + offset, px * (2) + offset);
+            ctx.lineTo(px * (i) + offset, px * (31) + offset);
 
+            ctx.moveTo(px * (2) + offset, px * (i) + offset);
+            ctx.lineTo(px * (31) + offset, px * (i) + offset);
+          }
+        }
+      }
+      if (width == 29) {
+        for (var i = 4; i <= 33; i++) {
+          for (var j = 4; j <= 33; j++) {
+            ctx.moveTo(px * (i) + offset, px * (4) + offset);
+            ctx.lineTo(px * (i) + offset, px * (33) + offset);
+
+            ctx.moveTo(px * (4) + offset, px * (i) + offset);
+            ctx.lineTo(px * (33) + offset, px * (i) + offset);
+          }
+        }
       }
       ctx.stroke();
       ctx.save();
@@ -818,65 +840,151 @@ var QR = (function () {
             ctx.fillRect(px * (4 + i) + offset, px * (4 + j) + offset, px, px);
           }
         }
-
       }
-
       ctx.beginPath()//开始新的绘制，与前面的设置无关
       ctx.setStrokeStyle('#777777')
       ctx.setLineWidth(1);//线宽
-      //外层四个角=====================================================
-      //左上
-      ctx.moveTo(px * (2) + offset, px * (2) + offset);
-      ctx.lineTo(px * (2) + offset, px * (2.5) + offset);
-      ctx.moveTo(px * (2) + offset, px * (2) + offset);
-      ctx.lineTo(px * (2.5) + offset, px * (2) + offset);
-      //右上
-      ctx.moveTo(px * (width + 6) + offset, px * (2) + offset);
-      ctx.lineTo(px * (width + 6) + offset, px * (2.5) + offset);
-      ctx.moveTo(px * (width + 6) + offset, px * (2) + offset);
-      ctx.lineTo(px * (width + 5.5) + offset, px * (2) + offset);
-      //左下
-      ctx.moveTo(px * (2) + offset, px * (width + 6) + offset);
-      ctx.lineTo(px * (2.5) + offset, px * (width + 6) + offset);
-      ctx.moveTo(px * (2) + offset, px * (width + 5.5) + offset);
-      ctx.lineTo(px * (2) + offset, px * (width + 6) + offset);
-      //右下
-      ctx.moveTo(px * (width + 6) + offset, px * (width + 6) + offset);
-      ctx.lineTo(px * (width + 5.5) + offset, px * (width + 6) + offset);
-      ctx.moveTo(px * (width + 6) + offset, px * (width + 5.5) + offset);
-      ctx.lineTo(px * (width + 6) + offset, px * (width + 6) + offset);
+      if (width == 21) {
+        // ==========内层==============
+        ctx.moveTo(px * (4) + offset, px * (4) + offset);
+        ctx.lineTo(px * (4.5) + offset, px * (4) + offset);
+        ctx.moveTo(px * (4) + offset, px * (4) + offset);
+        ctx.lineTo(px * (4) + offset, px * (4.5) + offset);
 
-      //内层===================================================
-      //左上
-      ctx.moveTo(px * (4) + offset, px * (4) + offset);
-      ctx.lineTo(px * (4) + offset, px * (4.5) + offset);
-      ctx.moveTo(px * (4) + offset, px * (4) + offset);
-      ctx.lineTo(px * (4.5) + offset, px * (4) + offset);
-      //右上
-      ctx.moveTo(px * (width + 4) + offset, px * (4) + offset);
-      ctx.lineTo(px * (width + 4) + offset, px * (4.5) + offset);
-      ctx.moveTo(px * (width + 4) + offset, px * (4) + offset);
-      ctx.lineTo(px * (width + 3.5) + offset, px * (4) + offset);
-      //左下
-      ctx.moveTo(px * (4) + offset, px * (width + 4) + offset);
-      ctx.lineTo(px * (4.5) + offset, px * (width + 4) + offset);
-      ctx.moveTo(px * (4) + offset, px * (width + 3.5) + offset);
-      ctx.lineTo(px * (4) + offset, px * (width + 4) + offset);
-      //右下
-      ctx.moveTo(px * (width + 4) + offset, px * (width + 4) + offset);
-      ctx.lineTo(px * (width + 3.5) + offset, px * (width + 4) + offset);
-      ctx.moveTo(px * (width + 4) + offset, px * (width + 3.5) + offset);
-      ctx.lineTo(px * (width + 4) + offset, px * (width + 4) + offset);
+        ctx.moveTo(px * (24.5) + offset, px * (4) + offset);
+        ctx.lineTo(px * (25) + offset, px * (4) + offset);
+        ctx.moveTo(px * (25) + offset, px * (4) + offset);
+        ctx.lineTo(px * (25) + offset, px * (4.5) + offset);
 
+        ctx.moveTo(px * (4) + offset, px * (25) + offset);
+        ctx.lineTo(px * (4.5) + offset, px * (25) + offset);
+        ctx.moveTo(px * (4) + offset, px * (25) + offset);
+        ctx.lineTo(px * (4) + offset, px * (24.5) + offset);
+
+        ctx.moveTo(px * (25) + offset, px * (24.5) + offset);
+        ctx.lineTo(px * (25) + offset, px * (25) + offset);
+        ctx.moveTo(px * (24.5) + offset, px * (25) + offset);
+        ctx.lineTo(px * (25) + offset, px * (25) + offset);
+        // ==========中层==============
+        ctx.moveTo(px * (2) + offset, px * (2) + offset);
+        ctx.lineTo(px * (2.5) + offset, px * (2) + offset);
+        ctx.moveTo(px * (2) + offset, px * (2) + offset);
+        ctx.lineTo(px * (2) + offset, px * (2.5) + offset);
+
+        ctx.moveTo(px * (26.5) + offset, px * (2) + offset);
+        ctx.lineTo(px * (27) + offset, px * (2) + offset);
+        ctx.moveTo(px * (27) + offset, px * (2) + offset);
+        ctx.lineTo(px * (27) + offset, px * (2.5) + offset);
+
+        ctx.moveTo(px * (2) + offset, px * (27) + offset);
+        ctx.lineTo(px * (2.5) + offset, px * (27) + offset);
+        ctx.moveTo(px * (2) + offset, px * (27) + offset);
+        ctx.lineTo(px * (2) + offset, px * (26.5) + offset);
+
+        ctx.moveTo(px * (27) + offset, px * (26.5) + offset);
+        ctx.lineTo(px * (27) + offset, px * (27) + offset);
+        ctx.moveTo(px * (26.5) + offset, px * (27) + offset);
+        ctx.lineTo(px * (27) + offset, px * (27) + offset);
+
+        // ==========外层==============
+        ctx.moveTo(px * (0) + offset, px * (0) + offset);
+        ctx.lineTo(px * (0.5) + offset, px * (0) + offset);
+        ctx.moveTo(px * (0) + offset, px * (0) + offset);
+        ctx.lineTo(px * (0) + offset, px * (0.5) + offset);
+
+        ctx.moveTo(px * (28.5) + offset, px * (0) + offset);
+        ctx.lineTo(px * (29) + offset, px * (0) + offset);
+        ctx.moveTo(px * (29) + offset, px * (0) + offset);
+        ctx.lineTo(px * (29) + offset, px * (0.5) + offset);
+
+        ctx.moveTo(px * (0) + offset, px * (29) + offset);
+        ctx.lineTo(px * (0.5) + offset, px * (29) + offset);
+        ctx.moveTo(px * (0) + offset, px * (29) + offset);
+        ctx.lineTo(px * (0) + offset, px * (28.5) + offset);
+
+        ctx.moveTo(px * (29) + offset, px * (28.5) + offset);
+        ctx.lineTo(px * (29) + offset, px * (29) + offset);
+        ctx.moveTo(px * (28.5) + offset, px * (29) + offset);
+        ctx.lineTo(px * (29) + offset, px * (29) + offset);
+      }
+      if (width == 25) {
+        // ==========中层==============
+        ctx.moveTo(px * (4) + offset, px * (4) + offset);
+        ctx.lineTo(px * (4.5) + offset, px * (4) + offset);
+        ctx.moveTo(px * (4) + offset, px * (4) + offset);
+        ctx.lineTo(px * (4) + offset, px * (4.5) + offset);
+
+        ctx.moveTo(px * (28.5) + offset, px * (4) + offset);
+        ctx.lineTo(px * (29) + offset, px * (4) + offset);
+        ctx.moveTo(px * (29) + offset, px * (4) + offset);
+        ctx.lineTo(px * (29) + offset, px * (4.5) + offset);
+
+        ctx.moveTo(px * (4) + offset, px * (29) + offset);
+        ctx.lineTo(px * (4.5) + offset, px * (29) + offset);
+        ctx.moveTo(px * (4) + offset, px * (29) + offset);
+        ctx.lineTo(px * (4) + offset, px * (28.5) + offset);
+
+        ctx.moveTo(px * (29) + offset, px * (28.5) + offset);
+        ctx.lineTo(px * (29) + offset, px * (29) + offset);
+        ctx.moveTo(px * (28.5) + offset, px * (29) + offset);
+        ctx.lineTo(px * (29) + offset, px * (29) + offset);
+
+        // ==========外层==============
+        ctx.moveTo(px * (2) + offset, px * (2) + offset);
+        ctx.lineTo(px * (2.5) + offset, px * (2) + offset);
+        ctx.moveTo(px * (2) + offset, px * (2) + offset);
+        ctx.lineTo(px * (2) + offset, px * (2.5) + offset);
+
+        ctx.moveTo(px * (30.5) + offset, px * (2) + offset);
+        ctx.lineTo(px * (31) + offset, px * (2) + offset);
+        ctx.moveTo(px * (31) + offset, px * (2) + offset);
+        ctx.lineTo(px * (31) + offset, px * (2.5) + offset);
+
+        ctx.moveTo(px * (2) + offset, px * (31) + offset);
+        ctx.lineTo(px * (2.5) + offset, px * (31) + offset);
+        ctx.moveTo(px * (2) + offset, px * (31) + offset);
+        ctx.lineTo(px * (2) + offset, px * (30.5) + offset);
+
+        ctx.moveTo(px * (31) + offset, px * (30.5) + offset);
+        ctx.lineTo(px * (31) + offset, px * (31) + offset);
+        ctx.moveTo(px * (30.5) + offset, px * (31) + offset);
+        ctx.lineTo(px * (31) + offset, px * (31) + offset);
+      }
+      if (width == 29) {
+        // ==========外层==============
+        ctx.moveTo(px * (4) + offset, px * (4) + offset);
+        ctx.lineTo(px * (4.5) + offset, px * (4) + offset);
+        ctx.moveTo(px * (4) + offset, px * (4) + offset);
+        ctx.lineTo(px * (4) + offset, px * (4.5) + offset);
+
+        ctx.moveTo(px * (32.5) + offset, px * (4) + offset);
+        ctx.lineTo(px * (33) + offset, px * (4) + offset);
+        ctx.moveTo(px * (33) + offset, px * (4) + offset);
+        ctx.lineTo(px * (33) + offset, px * (4.5) + offset);
+
+        ctx.moveTo(px * (4) + offset, px * (33) + offset);
+        ctx.lineTo(px * (4.5) + offset, px * (33) + offset);
+        ctx.moveTo(px * (4) + offset, px * (33) + offset);
+        ctx.lineTo(px * (4) + offset, px * (32.5) + offset);
+
+        ctx.moveTo(px * (33) + offset, px * (32.5) + offset);
+        ctx.lineTo(px * (33) + offset, px * (33) + offset);
+        ctx.moveTo(px * (32.5) + offset, px * (33) + offset);
+        ctx.lineTo(px * (33) + offset, px * (33) + offset);
+      }
       ctx.stroke();
-      ctx.draw();
+      if (width <= 29) {
+        ctx.draw();
+      } else {
+        wx.showToast({
+          title: '内容过长',
+          image: '/image/icon_f.png',
+          duration: 2000
+        })
+      }
     }
   }
   module.exports = {
     qrApi: api
   }
-
-
-
-
 })();
