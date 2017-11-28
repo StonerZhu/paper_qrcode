@@ -819,24 +819,63 @@ var QR = (function () {
         }
 
       }
-      // ctx.beginPath
-      ctx.setStrokeStyle('#f40000')
-      for (var i = -2; i <= width + 2; i++) {
 
-        // if (i == 1) {
-          // ctx.moveTo(px * (1) + offset, px * (1) + offset);
-          // ctx.lineTo(px * (1) + offset, px * (1.5) + offset);
+      ctx.beginPath()//开始新的绘制，与前面的设置无关
+      ctx.setStrokeStyle('#777777')
+      ctx.setLineWidth(1);//线宽
+      //外层四个角=====================================================
+      //左上
+      ctx.moveTo(px * (2) + offset, px * (2) + offset);
+      ctx.lineTo(px * (2) + offset, px * (2.5) + offset);
+      ctx.moveTo(px * (2) + offset, px * (2) + offset);
+      ctx.lineTo(px * (2.5) + offset, px * (2) + offset);
+      //右上
+      ctx.moveTo(px * (width + 6) + offset, px * (2) + offset);
+      ctx.lineTo(px * (width + 6) + offset, px * (2.5) + offset);
+      ctx.moveTo(px * (width + 6) + offset, px * (2) + offset);
+      ctx.lineTo(px * (width + 5.5) + offset, px * (2) + offset);
+      //左下
+      ctx.moveTo(px * (2) + offset, px * (width + 6) + offset);
+      ctx.lineTo(px * (2.5) + offset, px * (width + 6) + offset);
+      ctx.moveTo(px * (2) + offset, px * (width + 5.5) + offset);
+      ctx.lineTo(px * (2) + offset, px * (width + 6) + offset);
+      //右下
+      ctx.moveTo(px * (width + 6) + offset, px * (width + 6) + offset);
+      ctx.lineTo(px * (width + 5.5) + offset, px * (width + 6) + offset);
+      ctx.moveTo(px * (width + 6) + offset, px * (width + 5.5) + offset);
+      ctx.lineTo(px * (width + 6) + offset, px * (width + 6) + offset);
 
-          ctx.moveTo(px * (1 ) + offset, px * (1.5) + offset);
-          ctx.lineTo(px * ( 1) + offset, px * (2.5) + offset);
+      //内层===================================================
+      //左上
+      ctx.moveTo(px * (4) + offset, px * (4) + offset);
+      ctx.lineTo(px * (4) + offset, px * (4.5) + offset);
+      ctx.moveTo(px * (4) + offset, px * (4) + offset);
+      ctx.lineTo(px * (4.5) + offset, px * (4) + offset);
+      //右上
+      ctx.moveTo(px * (width + 4) + offset, px * (4) + offset);
+      ctx.lineTo(px * (width + 4) + offset, px * (4.5) + offset);
+      ctx.moveTo(px * (width + 4) + offset, px * (4) + offset);
+      ctx.lineTo(px * (width + 3.5) + offset, px * (4) + offset);
+      //左下
+      ctx.moveTo(px * (4) + offset, px * (width + 4) + offset);
+      ctx.lineTo(px * (4.5) + offset, px * (width + 4) + offset);
+      ctx.moveTo(px * (4) + offset, px * (width + 3.5) + offset);
+      ctx.lineTo(px * (4) + offset, px * (width + 4) + offset);
+      //右下
+      ctx.moveTo(px * (width + 4) + offset, px * (width + 4) + offset);
+      ctx.lineTo(px * (width + 3.5) + offset, px * (width + 4) + offset);
+      ctx.moveTo(px * (width + 4) + offset, px * (width + 3.5) + offset);
+      ctx.lineTo(px * (width + 4) + offset, px * (width + 4) + offset);
 
-        // }
-      }
+      ctx.stroke();
       ctx.draw();
     }
   }
   module.exports = {
     qrApi: api
   }
+
+
+  
 
 })();
